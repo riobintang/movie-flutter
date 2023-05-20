@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:konversi_mata_uang/currencyConvert.dart';
 import 'package:konversi_mata_uang/login.dart';
 import 'package:konversi_mata_uang/mainPage.dart';
+import 'package:konversi_mata_uang/menu3Page.dart';
 import 'package:konversi_mata_uang/profilePage.dart';
 // import 'package:uts_tpm/helpPage.dart';
 // import 'package:uts_tpm/login.dart';
@@ -67,18 +68,18 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
+            icon: Icon(Icons.home),
             label: 'Main',
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.help),
+            icon: Icon(Icons.account_circle_outlined),
             label: 'Profile',
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.blue,
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.green,
+        selectedItemColor: Colors.blue,
         onTap: (index) {
           _onItemTapped(index);
         },

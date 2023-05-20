@@ -12,31 +12,35 @@ void _changeDate() {
   } else if (dropdownvalue == 'WIT') {
     dateNow = DateFormat('EEEE, d MMM, yyyy HH:mm:ss')
         .format(DateTime.now().toUtc().add(const Duration(hours: 9)));
-  } else {
+  } else if (dropdownvalue == "WIB") {
     dateNow = DateFormat('EEEE, d MMM, yyyy HH:mm:ss')
         .format(DateTime.now().toUtc().add(const Duration(hours: 7)));
+  } else {
+    dateNow = DateFormat('EEEE, d MMM, yyyy HH:mm:ss')
+        .format(DateTime.now().toUtc().add(const Duration(hours: 1)));
   }
 }
 
-class CalendarPage extends StatefulWidget {
+class TimeZoneConverterPage extends StatefulWidget {
   @override
-  State<CalendarPage> createState() => _CalendarPageState();
+  State<TimeZoneConverterPage> createState() => _TimeZoneConverterState();
 }
 
-class _CalendarPageState extends State<CalendarPage> {
+class _TimeZoneConverterState extends State<TimeZoneConverterPage> {
   // List of items in our dropdown menu
   var items = [
     'WIB',
     'WITA',
     'WIT',
+    'London',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kalender'),
-        backgroundColor: Colors.deepOrange,
+        title: Text("Time Zone"),
+       // backgroundColor: Colors.deepOrange,
       ),
       body: Center(
         child: Column(
@@ -58,8 +62,12 @@ class _CalendarPageState extends State<CalendarPage> {
             SizedBox(
               height: 10,
             ),
-            SizedBox(
-              child: DropdownButton(
+            Container(margin: const EdgeInsets.all(15.0),
+  padding: const EdgeInsets.all(3.0),
+  decoration: BoxDecoration(
+    border: Border.all(color: Color.fromARGB(255, 86, 86, 86))
+  ),
+  child: DropdownButton(
                 // Initial Value
                 value: dropdownvalue,
 
@@ -79,7 +87,11 @@ class _CalendarPageState extends State<CalendarPage> {
                     _changeDate();
                   });
                 },
-              ),
+              ),),
+            SizedBox(
+              height: 35,
+              width: 40,
+              
             ),
           ],
         ),

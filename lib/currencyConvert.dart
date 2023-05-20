@@ -107,7 +107,12 @@ class _CurrencyConvert extends State<CurrencyConvert> {
             ),
           ),
           SizedBox(
-            height: 70,
+            height: 30,
+          ),
+          //Text("To", style: TextStyle(fontSize: 20),),
+          Icon( Icons.arrow_downward_outlined, ),
+          SizedBox(
+            height: 30,
           ),
           Container(
             child: Row(
@@ -146,9 +151,9 @@ class _CurrencyConvert extends State<CurrencyConvert> {
               ],
             ),
           ),
-          ElevatedButton(onPressed: _calculateConvert, child: Text("Convert")),
           SizedBox(height: 20,),
-          
+          ElevatedButton(onPressed: _calculateConvert, child: Text("Convert")),
+
         ],
       )),
     );

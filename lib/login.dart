@@ -65,8 +65,8 @@ class _LoginState extends State<Login> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          if (usernameController.text == 'user' &&
-                              passwordController.text == 'user123') {
+                          if (usernameController.text == '' &&
+                              passwordController.text == '') {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
