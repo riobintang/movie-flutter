@@ -18,6 +18,12 @@ class _LoginState extends State<Login> {
   final passwordController = TextEditingController();
 
   @override
+  void dispose() {
+    usernameController.clear();
+    passwordController.clear();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -95,6 +101,18 @@ class _LoginState extends State<Login> {
                           )),
                         ),
                       ),
+                      SizedBox(height: 15,),
+                      Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Don't have an account?"),
+                        TextButton(onPressed: () {
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
+                        },
+                        child: Text("Sign Up"))
+                        ],
+                    ),
+                    SizedBox(height: 15,),
                     ],
                   )),
             ],
