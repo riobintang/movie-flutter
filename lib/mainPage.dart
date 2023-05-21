@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:konversi_mata_uang/currencyConvert.dart';
+import 'package:movie_app/currencyConvert.dart';
 //import 'package:uts_tpm/favoritePage.dart';
 //import 'package:uts_tpm/memberPage.dart';
 //import 'package:uts_tpm/sitesPage.dart';

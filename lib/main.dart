@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:konversi_mata_uang/currencyConvert.dart';
-import 'package:konversi_mata_uang/login.dart';
-import 'package:konversi_mata_uang/timeZoneConverter.dart';
+import 'package:movie_app/currencyConvert.dart';
+import 'package:movie_app/login.dart';
+import 'package:movie_app/timeZoneConverter.dart';
 
 void main() {
   runApp(const MyApp());

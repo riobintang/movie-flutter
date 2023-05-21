@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:konversi_mata_uang/currencyConvert.dart';
-import 'package:konversi_mata_uang/messagePage.dart';
-import 'package:konversi_mata_uang/timeZoneConverter.dart';
+import 'package:movie_app/currencyConvert.dart';
+import 'package:movie_app/messagePage.dart';
+import 'package:movie_app/timeZoneConverter.dart';
 
 class ProfilePage extends StatelessWidget {
   @override

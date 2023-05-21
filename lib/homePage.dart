@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:konversi_mata_uang/currencyConvert.dart';
-import 'package:konversi_mata_uang/login.dart';
-import 'package:konversi_mata_uang/mainPage.dart';
-import 'package:konversi_mata_uang/menu3Page.dart';
-import 'package:konversi_mata_uang/profilePage.dart';
+import 'package:movie_app/currencyConvert.dart';
+import 'package:movie_app/login.dart';
+import 'package:movie_app/mainPage.dart';
+import 'package:movie_app/menu3Page.dart';
+import 'package:movie_app/profilePage.dart';
 // import 'package:uts_tpm/helpPage.dart';
 // import 'package:uts_tpm/login.dart';
 // import 'package:uts_tpm/mainPage.dart';
