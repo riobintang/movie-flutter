@@ -3,6 +3,8 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/login.dart';
 import 'package:movie_app/services/auth.dart';
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -15,10 +17,37 @@ class _RegisterPageState extends State<RegisterPage> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
+  String hashPassword(String password) {
+    var bytes = utf8.encode(password); // Mengubah password menjadi bytes
+    var digest =
+        sha256.convert(bytes); // Menghash password menggunakan metode SHA-256
+    return digest.toString(); // Mengembalikan hasil hash sebagai string
+  }
+
   void registerUser() {
     String username = usernameController.text;
     String password = passwordController.text;
-    Auth.authRegisterUser(username: username, password: password);
+    String hashPass = hashPassword(password);
+    print(hashPass);
+    Auth.authRegisterUser(username: username, password: hashPass);
+    dispose();
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Successfully Register'),
+          content: Text('Your accout has been successfully registered'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -30,90 +59,119 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Container(
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 20.0),
-          height: 500,
-          width: 400,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                //child: Image.asset('assets/images/user.png'),
-                height: 120,
-                width: 120,
-                margin: EdgeInsets.symmetric(vertical: 50),
-              ),
-              Container(
-                height: 180,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextField(
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Movie App',
+                    style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                  ),
+                  SizedBox(height: 48),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24),
+                    child: TextField(
                       controller: usernameController,
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                        hintText: 'Username',
+                        hintStyle: TextStyle(color: Colors.white70),
+                        filled: true,
+                        fillColor: Colors.black,
                         border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30))),
-                        hintText: "Username",
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide.none,
+                        ),
+                        prefixIcon: Icon(
+                          Icons.person_outline,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                    TextField(
+                  ),
+                  SizedBox(height: 16),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: TextField(
                       controller: passwordController,
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(color: Colors.white),
                       obscureText: true,
-                      enableSuggestions: false,
-                      autocorrect: false,
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                        hintText: 'Password',
+                        hintStyle: TextStyle(color: Colors.white70),
+                        filled: true,
+                        fillColor: Colors.black,
                         border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30))),
-                        hintText: "Password",
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24),
-                      child: ElevatedButton(
-                        onPressed: registerUser,
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.red,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          padding: EdgeInsets.symmetric(vertical: 18),
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide.none,
                         ),
-                        child: Container(
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Sign Up',
-                            style: TextStyle(fontSize: 18),
-                          ),
+                        prefixIcon: Icon(
+                          Icons.lock_outline,
+                          color: Colors.white,
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 15,
+                  ),
+                  SizedBox(height: 24),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        padding: EdgeInsets.symmetric(vertical: 18),
+                      ),
+                      onPressed: registerUser,
+                      child: Container(
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Register',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Already have an account?"),
-                        TextButton(onPressed: () {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
+                  ),
+                  SizedBox(height: 24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Already have an account?",
+                        style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                      ),
+                      // buttom to register
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Login(),
+                            ),
+                          );
                         },
-                        child: Text("Login"))
-                        ],
-                    ),
-                    SizedBox(height: 15,),
-                  ],
-                ),
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

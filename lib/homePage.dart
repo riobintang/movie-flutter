@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/currencyConvert.dart';
 import 'package:movie_app/login.dart';
-import 'package:movie_app/mainPage.dart';
-import 'package:movie_app/menu3Page.dart';
+import 'package:movie_app/movie.dart';
 import 'package:movie_app/profilePage.dart';
-// import 'package:uts_tpm/helpPage.dart';
-// import 'package:uts_tpm/login.dart';
-// import 'package:uts_tpm/mainPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    void _logout() async {
+      final SharedPreferences logindata = await SharedPreferences.getInstance();
+      logindata.remove('login');
+      logindata.remove('username');
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Login()));
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text('Movie App'),
+        backgroundColor: Colors.black,
         centerTitle: true,
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => Login()),
-                );
-              },
-              icon: Icon(Icons.logout))
-        ],
       ),
       body: MyStatefulWidget(),
     );
@@ -46,11 +42,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
-    //CurrencyConvert(),
-    MainPage(),
+    MovieListPage(),
     ProfilePage(),
-    
-    // HelpPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -70,16 +63,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Main',
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_outlined),
             label: 'Profile',
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.black,
           ),
+          BottomNavigationBarItem(icon: Icon(Icons.logout),
+          label: 'Logout',
+          backgroundColor: Colors.black),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Colors.black,
         onTap: (index) {
           _onItemTapped(index);
         },

@@ -19,12 +19,6 @@ class CurrencyConvert extends StatefulWidget {
 class _CurrencyConvert extends State<CurrencyConvert> {
   var items = ["USD", "IDR", "RUB", "EUR"];
   List<double> converts = [1, 14800, 79.83, 0.92];
-  var currencys = [
-    {"currency": "USD", "value": 1},
-    {"currency": "IDR", "value": 14800},
-    {"currency": "RUB", "value": 79.83},
-    {"currency": "EUR", "value": 0.92}
-  ];
   final TextEditingController _firstValueController = TextEditingController();
   //final TextEditingController _secondValue = TextEditingController();
 
@@ -32,20 +26,14 @@ class _CurrencyConvert extends State<CurrencyConvert> {
     int? firstValue = int.tryParse(_firstValueController.text);
 
     firstValue ??= 0;
-    
+
     double tesValue = converts[items.indexOf(firstCurrency)];
     setState(() {
       int from = items.indexOf(firstCurrency);
-    int to = items.indexOf(secondCurrency);
-      // print(firstValue);
-      // print(converts[to]);
-      // print("first: $firstCurrency");
-      // print("second: $secondCurrency");
-      // print("from: $from");
-      // print("to: $to");
-      secondValue = double.parse(((firstValue!/converts[from]) * converts[to]).toStringAsFixed(3));
+      int to = items.indexOf(secondCurrency);
+      secondValue = double.parse(
+          ((firstValue! / converts[from]) * converts[to]).toStringAsFixed(3));
     });
-    
   }
 
   @override
@@ -53,6 +41,7 @@ class _CurrencyConvert extends State<CurrencyConvert> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Currency Convert"),
+        backgroundColor: Colors.black,
       ),
       body: Center(
           child: Column(
@@ -110,7 +99,9 @@ class _CurrencyConvert extends State<CurrencyConvert> {
             height: 30,
           ),
           //Text("To", style: TextStyle(fontSize: 20),),
-          Icon( Icons.arrow_downward_outlined, ),
+          Icon(
+            Icons.arrow_downward_outlined,
+          ),
           SizedBox(
             height: 30,
           ),
@@ -145,15 +136,22 @@ class _CurrencyConvert extends State<CurrencyConvert> {
                         onChanged: (String? newValue) {
                           setState(() {
                             secondCurrency = newValue!;
-                            
                           });
                         })),
               ],
             ),
           ),
-          SizedBox(height: 20,),
-          ElevatedButton(onPressed: _calculateConvert, child: Text("Convert")),
-
+          SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+            onPressed: _calculateConvert,
+            child: Text("Convert"),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.black,
+              onPrimary: Colors.white,
+            ),
+          ),
         ],
       )),
     );

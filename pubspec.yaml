@@ -45,6 +45,7 @@ dependencies:
   encrypt: ^5.0.1
   http: ^0.13.4
   sqflite: ^2.2.8+4
+  crypto: ^3.0.3
 
 dev_dependencies:
   flutter_test:

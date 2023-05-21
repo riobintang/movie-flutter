@@ -30,38 +30,54 @@ class ProfilePage extends StatelessWidget {
                 SizedBox(height: 30),
                 SizedBox(
                   height: 35,
-                  width: 140,
+                  width: 160,
                   child: ElevatedButton(
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CurrencyConvert())),
-                      child: Text("Currency Convert")),
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CurrencyConvert())),
+                    child: Text("Currency Convert"),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.black,
+                      onPrimary: Colors.white,
+                    ),
+                  ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 //ElevatedButton(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => CurrencyConvert())), child: Text("Currency Convert")),
                 SizedBox(
                   height: 35,
-                  width: 140,
+                  width: 160,
                   child: ElevatedButton(
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => messagePage())),
-                      child: Text("Kesan Pesan")),
+                    onPressed: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => messagePage())),
+                    child: Text("Kesan Pesan"),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.black,
+                      onPrimary: Colors.white,
+                    ),
+                  ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 SizedBox(
                   height: 35,
-                  width: 140,
+                  width: 160,
                   child: ElevatedButton(
                     onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => TimeZoneConverterPage())),
-                    child: Text("Time Zone")),
+                    child: Text("Time Zone"),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.black,
+                      onPrimary: Colors.white,
+                    ),
+                  ),
                 ),
-                
               ],
             ),
           ),
