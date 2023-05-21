@@ -5,19 +5,16 @@ import 'package:movie_app/movie.dart';
 import 'package:movie_app/profilePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    void _logout() async {
-      final SharedPreferences logindata = await SharedPreferences.getInstance();
-      logindata.remove('login');
-      logindata.remove('username');
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Login()));
-    }
+  State<HomePage> createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Movie App'),
@@ -47,6 +44,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   ];
 
   void _onItemTapped(int index) {
+    if (index == 2) {
+      _logout();
+    }
     setState(() {
       _selectedIndex = index;
     });
@@ -70,9 +70,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             label: 'Profile',
             backgroundColor: Colors.black,
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.logout),
-          label: 'Logout',
-          backgroundColor: Colors.black),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.logout),
+              label: 'Logout',
+              backgroundColor: Colors.black),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.black,
@@ -81,5 +82,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         },
       ),
     );
+  }
+
+  void _logout() async {
+    final SharedPreferences logindata = await SharedPreferences.getInstance();
+    logindata.remove('login');
+    logindata.remove('username');
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => Login()));
   }
 }
