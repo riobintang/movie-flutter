@@ -123,7 +123,7 @@ class _LoginState extends State<Login> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Movie App',
+                    'Pilem',
                     style: TextStyle(
                       fontSize: 36,
                       fontWeight: FontWeight.bold,

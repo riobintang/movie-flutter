@@ -23,7 +23,7 @@ class _CurrencyConvert extends State<CurrencyConvert> {
   //final TextEditingController _secondValue = TextEditingController();
 
   void _calculateConvert() {
-    int? firstValue = int.tryParse(_firstValueController.text);
+    double? firstValue = double.tryParse(_firstValueController.text);
 
     firstValue ??= 0;
 
