@@ -27,7 +27,25 @@ class _RegisterPageState extends State<RegisterPage> {
   void registerUser() {
     String username = usernameController.text;
     String password = passwordController.text;
-    String hashPass = hashPassword(password);
+    if(username == '' || password == '') {
+      showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Failed'),
+          content: Text('Username or Password is empty'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+      );
+    } else {String hashPass = hashPassword(password);
     print(hashPass);
     Auth.authRegisterUser(username: username, password: hashPass);
     dispose();
@@ -47,7 +65,8 @@ class _RegisterPageState extends State<RegisterPage> {
           ],
         );
       },
-    );
+    );}
+    
   }
 
   @override
