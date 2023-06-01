@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 String firstCurrency = "USD";
 String secondCurrency = "IDR";
-double secondValue = 0;
+
 
 class CurrencyConvert extends StatefulWidget {
   const CurrencyConvert({Key? key}) : super(key: key);
@@ -17,6 +17,7 @@ class CurrencyConvert extends StatefulWidget {
 }
 
 class _CurrencyConvert extends State<CurrencyConvert> {
+  double secondValue = 0;
   var items = ["USD", "IDR", "RUB", "EUR"];
   List<double> converts = [1, 14800, 79.83, 0.92];
   final TextEditingController _firstValueController = TextEditingController();
