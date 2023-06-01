@@ -86,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Pilem',
+                    'Film',
                     style: TextStyle(
                       fontSize: 36,
                       fontWeight: FontWeight.bold,
