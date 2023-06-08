@@ -8,30 +8,8 @@ class messagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Kesan Pesan"),
-        backgroundColor: Colors.black,
-      ),
-      body: Container(
-        child: Padding(
-          padding: EdgeInsets.all(15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 16.0),
-              Card(
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    'Dosennya memberikan penjelasan yang mudah dimengerti dan materi yang diberikan menantang. Perkuliahannya menyenangkan tetapi saya tidak mau mengalaminya lagi. Pesan dari saya, diperbanyak materi tentang flutter walaupun materi sudah didapat dari praktikum.',
-                    style: TextStyle(fontSize: 16.0),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      appBar: AppBar(title: Text("Kesan Pesan"),backgroundColor: Colors.black,),
+      body: Container(child: Padding(padding: EdgeInsets.all(15), child: Text("Dosennya memberikan penjelasan yang mudah dimengerti dan materi yang diberikan menantang. Perkuliahannya menyenangkan tetapi saya tidak mau mengalaminya lagi. Pesan dari saya, diperbanyak materi tentang flutter walaupun materi sudah didapat dari praktikum.", style: TextStyle(fontSize: 30),),),),    
     );
   }
 }

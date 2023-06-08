@@ -47,7 +47,7 @@ class _LoginState extends State<Login> {
     }
   }
 
-  void Ceklogin() async {
+  void CheckLogin() async {
     if (usernameController.text != '' && passwordController.text != '') {
       String hashPass = hashPassword(passwordController.text);
       bool res = await Auth.authLoginUser(
@@ -190,7 +190,7 @@ class _LoginState extends State<Login> {
                         String username = usernameController.text;
                         String password = passwordController.text;
 
-                        Ceklogin();
+                        CheckLogin();
                       },
                       child: Container(
                         width: double.infinity,
