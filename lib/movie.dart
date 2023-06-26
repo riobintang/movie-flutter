@@ -3,6 +3,7 @@ import 'services/BaseNetwork.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'detail_movies.dart';
+import 'movieService.dart';
 
 class MovieListPage extends StatefulWidget {
   @override
@@ -23,49 +24,11 @@ class _MovieListPageState extends State<MovieListPage> {
     fetchAllMovies();
   }
 
-  Future<List<dynamic>> getTopMovies() async {
-    final url = Uri.parse('$BASE_URL/movie/top_rated?api_key=$API_KEY');
-    final response = await http.get(url);
 
-    if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body);
-      final results = jsonData['results'];
-      return results;
-    } else {
-      throw Exception('Failed to load top movies');
-    }
-  }
-
-  Future<List<dynamic>> getAllMovies() async {
-    final url = Uri.parse('$BASE_URL/discover/movie?api_key=$API_KEY');
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body);
-      final results = jsonData['results'];
-      return results;
-    } else {
-      throw Exception('Failed to load recent movies');
-    }
-  }
-
-  Future<List<dynamic>> searchMovies(String query) async {
-    final url =
-        Uri.parse('$BASE_URL/search/movie?api_key=$API_KEY&query=$query');
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body);
-      final results = jsonData['results'];
-      return results;
-    } else {
-      throw Exception('Failed to search movies');
-    }
-  }
 
   void fetchTopMovies() async {
     try {
-      final movies = await getTopMovies();
+      final movies = await MovieService.getTopMovies();
       setState(() {
         topMovies = movies;
       });
@@ -76,7 +39,7 @@ class _MovieListPageState extends State<MovieListPage> {
 
   void fetchAllMovies() async {
     try {
-      final movies = await getAllMovies();
+      final movies = await MovieService.getAllMovies();
       setState(() {
         allMovies = movies;
       });
@@ -87,7 +50,7 @@ class _MovieListPageState extends State<MovieListPage> {
 
   void searchMovie(String query) async {
     try {
-      final results = await searchMovies(query);
+      final results = await MovieService.searchMovies(query);
       setState(() {
         searchResults = results;
       });
@@ -102,7 +65,7 @@ class _MovieListPageState extends State<MovieListPage> {
       String originalTitle,
       String originalLanguage,
       String releaseDate,
-      String detail) {
+      String overview) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -112,7 +75,7 @@ class _MovieListPageState extends State<MovieListPage> {
           originalTitle: originalTitle,
           originalLanguage: originalLanguage,
           releaseDate: releaseDate,
-          overview: detail,
+          overview: overview,
         ),
       ),
     );
@@ -128,7 +91,7 @@ class _MovieListPageState extends State<MovieListPage> {
         title: TextField(
           controller: searchController,
           decoration: InputDecoration(
-            hintText: 'Search movies',
+            hintText: 'Search',
             suffixIcon: IconButton(
               icon: Icon(Icons.search),
               onPressed: () => searchMovie(searchController.text),
@@ -166,11 +129,11 @@ class _MovieListPageState extends State<MovieListPage> {
                     final originalTitle = movie['original_title'];
                     final originalLanguage = movie['original_language'];
                     final releaseDate = movie['release_date'];
-                    final detail = movie['overview'];
+                    final overview = movie['overview'];
 
                     return GestureDetector(
                       onTap: () => navigateToMovieDetail(title, posterPath,
-                          originalTitle, originalLanguage, releaseDate, detail),
+                          originalTitle, originalLanguage, releaseDate, overview),
                       child: Container(
                         width: 120,
                         margin: EdgeInsets.symmetric(horizontal: 8.0),
@@ -228,7 +191,7 @@ class _MovieListPageState extends State<MovieListPage> {
                   final originalTitle = movie['original_title'];
                   final originalLanguage = movie['original_language'];
                   final releaseDate = movie['release_date'];
-                  final detail = movie['overview'];
+                  final overview = movie['overview'];
 
                   return ListTile(
                     leading: Image.network(
@@ -244,7 +207,7 @@ class _MovieListPageState extends State<MovieListPage> {
                       ),
                     ),
                     onTap: () => navigateToMovieDetail(title, posterPath,
-                        originalTitle, originalLanguage, releaseDate, detail),
+                        originalTitle, originalLanguage, releaseDate, overview),
                     
                   );
                 },
